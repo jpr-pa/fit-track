@@ -1,0 +1,39 @@
+/* frontend/styles/global.css */
+
+/* Import Tailwind's base styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom global styles */
+body {
+  @apply bg-gray-100 text-gray-800 font-sans;
+}
+
+input, button, textarea, select {
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-400;
+}
+
+a {
+  @apply text-blue-600 hover:underline;
+}
+
+/* Utility class for form containers */
+.form-container {
+  @apply w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md;
+}
+
+/* Custom title styles */
+.title {
+  @apply text-2xl font-bold text-center mb-4 text-gray-800;
+}
+
+/* Status messages */
+.status-success {
+  @apply text-sm text-green-600 text-center mt-2;
+}
+
+.status-error {
+  @apply text-sm text-red-600 text-center mt-2;
+}
+
