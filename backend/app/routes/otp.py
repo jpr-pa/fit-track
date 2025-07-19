@@ -93,3 +93,4 @@ def verify_forgot_otp():
     else:
         return jsonify({"error": "Invalid OTP"}), 401
 
+
