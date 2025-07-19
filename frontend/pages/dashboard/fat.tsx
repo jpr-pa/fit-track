@@ -21,7 +21,7 @@ const FatCalculator: React.FC = () => {
     e.preventDefault();
     setError("");
     try {
-      const res = await fetch("http://localhost:5000/calculate/fat", {
+      const res = await fetch("http://34.93.202.99:5000/calculate/fat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

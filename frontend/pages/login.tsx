@@ -15,7 +15,7 @@ const LoginPage: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/login_password", {
+      const response = await fetch("http://34.93.202.99:5000/login_password", {
         method: "POST",
         credentials: "include",
         headers: {

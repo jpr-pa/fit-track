@@ -9,7 +9,7 @@ import {
 } from 'relay-runtime';
 
 const fetchGraphQL: FetchFunction = async (operation, variables) => {
-  const response = await fetch('http://localhost:5000/graphql', {
+  const response = await fetch('http://34.93.202.99:5000/graphql', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

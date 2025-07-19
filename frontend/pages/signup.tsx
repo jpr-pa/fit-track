@@ -26,7 +26,7 @@ const SignupPage: React.FC = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/signup_request_otp", {
+      const res = await fetch("http://34.93.202.99:5000/signup_request_otp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

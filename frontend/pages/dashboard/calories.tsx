@@ -16,7 +16,7 @@ const CaloriesPage: React.FC = () => {
   useEffect(() => {
     const fetchCalories = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/calories", {
+        const res = await fetch("http://34.93.202.99:5000/api/calories", {
           credentials: "include",
         });
         const data = await res.json();

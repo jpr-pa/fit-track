@@ -16,7 +16,7 @@ const HealthDashboard: React.FC = () => {
   useEffect(() => {
     const fetchHealth = async () => {
       try {
-        const res = await fetch("http://localhost:5000/health", {
+        const res = await fetch("http://34.93.202.99:5000/health", {
           credentials: "include",
         });
         const data = await res.json();

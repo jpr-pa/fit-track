@@ -31,7 +31,7 @@ const ChartsPage: React.FC = () => {
   useEffect(() => {
     const fetchChartData = async () => {
       try {
-        const res = await fetch("http://localhost:5000/dashboard/summary", {
+        const res = await fetch("http://34.93.202.99:5000/dashboard/summary", {
           credentials: "include",
         });
         const result = await res.json();
