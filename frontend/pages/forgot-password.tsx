@@ -19,7 +19,7 @@ export default function ForgotPassword() {
     }
 
     try {
-      const response = await fetch('http://<YOUR_BACKEND_IP>/api/forgot_password', {
+      const response = await fetch('http://34.93.202.99:5000/api/forgot_password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
