@@ -17,9 +17,9 @@ def create_app():
     app = Flask(__name__)
     CORS(app)
 
-    # Config from environment
+    # App Secret
     app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", "fallback-secret")
-    
+
     # MySQL Configuration
     app.config['MYSQL_HOST'] = os.getenv("MYSQL_HOST")
     app.config['MYSQL_USER'] = os.getenv("MYSQL_USER")
@@ -31,23 +31,8 @@ def create_app():
     # MongoDB Configuration
     mongo_uri = os.getenv("MONGO_URI")
     mongo_db_name = os.getenv("MONGO_DB_NAME", "fittrack")
-
-    try:
-        mongo_client = MongoClient(mongo_uri)
-        mongo_db = mongo_client[mongo_db_name]
-        mongo_client.admin.command('ping')
-        print("✅ Connected to MongoDB")
-    except Exception as e:
-        print(f"❌ MongoDB connection failed: {e}")
-
-    # Register Blueprints
-    from app.routes.auth import auth_bp
-    from app.routes.otp import otp_bp
-    from app.routes.health import health_bp
-
-    app.register_blueprint(auth_bp, url_prefix='/auth')
-    app.register_blueprint(otp_bp, url_prefix='/otp')
-    app.register_blueprint(health_bp, url_prefix='/health')
+    mongo_client = MongoClient(mongo_uri)
+    mongo_db = mongo_client[mongo_db_name]
 
     return app
 

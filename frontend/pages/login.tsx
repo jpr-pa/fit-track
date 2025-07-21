@@ -1,20 +1,17 @@
-'use client';
-
 import React, { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 
-const Login = () => {
+const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://34.93.202.99:5000/login', {
+      const response = await axios.post('http://localhost:5000/api/login', {
         username,
         password,
       });
@@ -23,10 +20,10 @@ const Login = () => {
         localStorage.setItem('token', response.data.token);
         router.push('/dashboard');
       } else {
-        setError(response.data.message);
+        setError(response.data.message || 'Login failed');
       }
-    } catch (error: any) {
-      setError('An error occurred during login');
+    } catch (err) {
+      setError('Login failed');
     }
   };
 
@@ -35,42 +32,59 @@ const Login = () => {
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         {error && (
-          <div className="mb-4 text-red-500 text-sm text-center">{error}</div>
+          <div className="mb-4 text-red-500 text-sm text-center">
+            {error}
+          </div>
         )}
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label htmlFor="username" className="block text-gray-700 font-semibold mb-1">
+        <form onSubmit={handleLogin}>
+          <div className="mb-4">
+            <label htmlFor="username" className="block mb-1 font-medium text-gray-700">
               Username
             </label>
             <input
-              id="username"
               type="text"
+              id="username"
+              className="w-full border border-gray-300 px-3 py-2 rounded"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
-          <div>
-            <label htmlFor="password" className="block text-gray-700 font-semibold mb-1">
+          <div className="mb-6">
+            <label htmlFor="password" className="block mb-1 font-medium text-gray-700">
               Password
             </label>
             <input
-              id="password"
               type="password"
+              id="password"
+              className="w-full border border-gray-300 px-3 py-2 rounded"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
           >
             Login
           </button>
         </form>
-        <div className="flex justify-between mt-6 text-sm text-blue-600">
-          <Link href="/signup" className="hover:underline">
-            Don’t have an account? Sign up
+        <p className="mt-4 text-sm text-center">
+          Don’t have an account?{' '}
+          <a href="/signup" className="text-blue-600 hover:underline">
+            Sign up
+          </a>
+        </p>
+        <p className="mt-2 text-sm text-center">
+          <a href="/forgot-password" className="text-blue-600 hover:underline">
+            Forgot password?
+          </a>
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
+
