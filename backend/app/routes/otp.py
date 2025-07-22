@@ -19,6 +19,7 @@ def send_signup_otp():
     if not otp:
         return jsonify({"error": "Failed to send OTP"}), 500
 
+    print(f"[OTP] Signup OTP sent to {email}")
     return jsonify({"message": "OTP sent to email"}), 200
 
 
@@ -72,9 +73,13 @@ def send_forgot_otp():
         return jsonify({"error": "User not found"}), 404
 
     otp = generate_otp(user.email, purpose="reset")
+    if not otp:
+        return jsonify({"error": "Failed to send OTP"}), 500
+
     session["reset_email"] = user.email
     session["reset_user_id"] = user.id
 
+    print(f"[OTP] Password reset OTP sent to {user.email}")
     return jsonify({"message": "OTP sent for password reset"}), 200
 
 
@@ -92,5 +97,3 @@ def verify_forgot_otp():
         return jsonify({"message": "OTP verified"}), 200
     else:
         return jsonify({"error": "Invalid OTP"}), 401
-
-
